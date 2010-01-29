@@ -1,6 +1,5 @@
 === eBizzSol Photo Search ===
 Contributors: Rifat Nabi
-Donate link: http://eBizzSol.com/
 Tags: photo, search, flickr
 Requires at least: 2.8
 Tested up to: 2.9.1
@@ -10,7 +9,9 @@ Short Description Here...
 
 == Description ==
 
-Description Here...
+A plugin to search images from Flickr.com and add to post. It adds a container on add/edit post page where you can search for flickr images. On click of the images, it will be added to your post.
+
+More changes coming soon. Please take a look at screen shots.
 
 == Screenshots ==
 
