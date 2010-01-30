@@ -1,5 +1,5 @@
 === eBizzSol Photo Search ===
-Contributors: Rifat Nabi
+Contributors: Rifat Nabi, Bapin Zaman
 Tags: photo, search, flickr
 Requires at least: 2.8
 Tested up to: 2.9.1
