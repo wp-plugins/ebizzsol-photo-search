@@ -20,7 +20,7 @@ More changes coming soon. Please take a look at screen shots.
 
 == Change Log ==
 
-= 0.0.2 =
+= 0.0.3 =
 + Image Size Option
 
 = 0.0.2 =
