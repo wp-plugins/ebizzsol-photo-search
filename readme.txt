@@ -15,7 +15,7 @@ More changes coming soon. Please take a look at screen shots.
 
 == Screenshots ==
 
-1. Screenshot Front
+1. Screenshot of Plugin in action
 2. Screenshot Admin Area
 
 == Change Log ==
