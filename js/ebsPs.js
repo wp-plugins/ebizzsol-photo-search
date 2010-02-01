@@ -71,7 +71,7 @@ function ebsPsJsSearch() {
             
             $j("<img/>").attr("src", ebsPsImg).attr("alt", ebsPsTitle).bind('click', function(){
                 
-                var imgHtml = $j("<p>").append($j(this).clone()).html();
+                var imgHtml = $j("<p>").append($j("<img/>").attr("src", ebsPsImg.replace('_s.jpg', $j('#ebsPsSize').val()+'.jpg')).attr("alt", ebsPsTitle)).html();
                 
                 //ebsPsTitle = $j("<a>").attr("href", ebsPsImgURI).html(ebsPsTitle);
                 ebsPsTitle = $j("<p>").append(ebsPsTitle).html();

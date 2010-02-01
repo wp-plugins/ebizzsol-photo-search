@@ -3,9 +3,9 @@
 Plugin Name: eBizzSol Photo Search
 Plugin URI: http://eBizzSol.com/
 Description: A Photo Search Plugins for WordPress.
-Version: 0.0.2
-Author: Rifat Nabi, Bapin Zaman
-Author URI: http://www.vistaarc.com, http://www.ebizzsol.com
+Version: 0.0.3
+Author: eBizzSol
+Author URI: http://www.ebizzsol.com
 */
 ?>
 <?php
@@ -57,6 +57,13 @@ function ebsPs_insert_panel(){
         <div class="taghint">Search Term</div>
         <input type="text" value="" autocomplete="off" class="newtag" id="ebsPsSearchTerm" />
         <input type="submit" value="Search" class="button" id="ebsPsSearch" />
+        <select id="ebsPsSize">
+            <option selected="selected" value="_s">Small Square (75x75)</option>
+            <option value="_t">Thumbnail (100 on longest side)</option>
+            <option value="_m">Small (240 on longest side)</option>
+            <option value="">Medium (500 on longest side)</option>
+            <option value="_b">Large (1024 on longest side)</option>
+        </select>
     </div>
     <p class="howto">Search Photos from <strong class="ebsPsN"><span class="ebsPsF">flick</span><span class="ebsPsR">r</span></strong>.</p>
 </div>
