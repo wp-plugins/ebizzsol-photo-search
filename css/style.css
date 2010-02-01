@@ -1,0 +1,23 @@
+.ebsPsF {
+    color:#0063dc;
+}
+.ebsPsR {
+    color: #ff0084;
+}
+.ebsPsN {
+    font-style: normal;
+}
+#ebsPsImages img {
+    margin: 2px;
+    border: 2px solid #e2e2e2;
+    opacity: 0.7;
+}
+#ebsPsImages img:hover {
+    border: 2px solid #000;
+    opacity: 1.0;
+}
+.ebsPsBox .newtag {
+    width:180px;
+    background: transparent;
+    position: relative;
+}
