@@ -12,23 +12,44 @@ Author URI: http://eBizzSol.com/
 
 add_action('init','ebsPs_init');
 function ebsPs_init() {
-    wp_enqueue_script('thickbox');
-    wp_enqueue_style('thickbox');
-}
-
-add_action('admin_head', 'ebsPs_wp_head');
-function ebsPs_wp_head() {
-    echo '<link rel="stylesheet" href="' . get_option('siteurl') . '/wp-content/plugins/ebizzsol-photo-search/css/style.css" type="text/css" />'."\n";
-    echo '<script src="' . get_option('siteurl') . '/wp-content/plugins/ebizzsol-photo-search/js/ebsPs.js"></script>'."\n";
+    wp_register_script('ebsPsFancybox', WP_PLUGIN_URL . '/ebizzsol-photo-search/fancybox/jquery.fancybox-1.2.6.pack.js');
+    wp_register_script('ebsPsFront', WP_PLUGIN_URL . '/ebizzsol-photo-search/js/ebsPsFront.js');
+    wp_enqueue_script('jquery');
+    wp_enqueue_script('ebsPsFancybox');
+    wp_enqueue_script('ebsPsFront');
+    
+    wp_register_style('ebsPsFancybox', WP_PLUGIN_URL . '/ebizzsol-photo-search/fancybox/jquery.fancybox-1.2.6.css');
+    wp_enqueue_style('ebsPsFancybox');
+        
 }
 
 //add_action('edit_page_form','ebsPs_init');
+add_action('admin_head','ebsPs_admin_head');
+function ebsPs_admin_head() {
+    global $post_ID;
+    
+echo <<< EOF
+    <script type="text/javascript">
+        var ebsPsGrp = 'ebsPsG$post_ID';
+    </script>
+EOF;
+
+}
+
 add_action('admin_init','ebsPs_admin_init');
 function ebsPs_admin_init() {
     if(function_exists('add_meta_box')) :
-        add_meta_box( 'my-custom-fields', 'eBizzSol Photo Search (<strong class="ebsPsN"><span class="ebsPsF">flick</span><span class="ebsPsR">r</span></strong>)', 'ebsPs_insert_panel', 'post', 'normal', 'high' );
+        add_meta_box( 'ebsPsFields', 'eBizzSol Photo Search (<strong class="ebsPsN"><span class="ebsPsF">flick</span><span class="ebsPsR">r</span></strong>)', 'ebsPs_insert_panel', 'post', 'normal', 'high' );
+        
+        wp_register_script('ebsPsMain', WP_PLUGIN_URL . '/ebizzsol-photo-search/js/ebsPs.js');
+        wp_enqueue_script('ebsPsMain');
+        
+        wp_register_style('ebsPsCss', WP_PLUGIN_URL . '/ebizzsol-photo-search/css/style.css');
+        wp_enqueue_style('ebsPsCss');
+        
     endif;
 }
+
 function ebsPs_insert_panel(){
 ?>
 <div class="ebsPsBox">
@@ -39,6 +60,7 @@ function ebsPs_insert_panel(){
     </div>
     <p class="howto">Search Photos from <strong class="ebsPsN"><span class="ebsPsF">flick</span><span class="ebsPsR">r</span></strong>.</p>
 </div>
+<div id="ebsPsLoader" style="display: none;"><img src="<?php echo WP_PLUGIN_URL; ?>/ebizzsol-photo-search/images/loader.gif" alt="Loading.." /></div>
 <div id="ebsPsImages"></div>
 <?php
 }

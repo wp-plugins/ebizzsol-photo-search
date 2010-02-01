@@ -15,9 +15,14 @@ More changes coming soon. Please take a look at screen shots.
 
 == Screenshots ==
 
-1. Screenshot Admin Area
+1. Screenshot Front
+2. Screenshot Admin Area
 
 == Change Log ==
+
+= 0.0.2 =
++ Fancybox Moded
+* Better Integration
 
 = 0.0.1 =
 * First Release.

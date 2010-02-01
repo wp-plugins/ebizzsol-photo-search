@@ -58,23 +58,25 @@ $j(function(){
 });
 
 function ebsPsJsSearch() {
+    $j('#ebsPsLoader').fadeIn();
     $j.getJSON("http://api.flickr.com/services/rest/?api_key=1b21384bd8bc85c3b67e667e8a076e58&method=flickr.photos.search&per_page=30&sort=relevance&text="+escape($j('#ebsPsSearchTerm').val())+"&extras=owner_name&format=json&jsoncallback=?",
     function(data){
         //alert(data.photos.total);
+        $j('#ebsPsLoader').fadeOut();
         $j('#ebsPsImages').empty();
-        var ebsPsGrp = 'ebsPsG'+rand(9999);
         $j.each(data.photos.photo, function(i,item){
             var ebsPsImg = 'http://farm'+item.farm+'.static.flickr.com/'+item.server+'/'+item.id+'_'+item.secret+'_s.jpg';
-            var ebsPsImgURI = 'http://www.flickr.com/photos/'+item.owner+'/'+item.id+'/';
+            var ebsPsImgURI = item.owner+'/'+item.id;
             var ebsPsTitle = item.title+' by '+item.ownername;
+            
             $j("<img/>").attr("src", ebsPsImg).attr("alt", ebsPsTitle).bind('click', function(){
                 
                 var imgHtml = $j("<p>").append($j(this).clone()).html();
                 
-                ebsPsTitle = $j("<a>").attr("href", ebsPsImgURI).html(ebsPsTitle);
+                //ebsPsTitle = $j("<a>").attr("href", ebsPsImgURI).html(ebsPsTitle);
                 ebsPsTitle = $j("<p>").append(ebsPsTitle).html();
                 
-                imgHtml = $j("<a>").attr("href", ebsPsImg.replace('_s.jpg', '.jpg')).attr("title", ebsPsTitle).attr("class", 'thickbox').attr("rel", ebsPsGrp).html(imgHtml);
+                imgHtml = $j("<a>").attr("href", ebsPsImg.replace('_s.jpg', '.jpg')).attr("title", ebsPsTitle).attr("class", 'ebsPsImg').attr("rel", ebsPsGrp).attr("rev", ebsPsImgURI).html(imgHtml);
                 imgHtml = $j("<p>").append(imgHtml).html();
                 
                 if( (typeof tinyMCE != "undefined") && tinyMCE.activeEditor && !tinyMCE.activeEditor.isHidden() ) {
