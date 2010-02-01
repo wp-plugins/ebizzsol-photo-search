@@ -3,7 +3,7 @@
 Plugin Name: eBizzSol Photo Search
 Plugin URI: http://eBizzSol.com/
 Description: A Photo Search Plugins for WordPress.
-Version: 0.0.1
+Version: 0.0.2
 Author: Rifat Nabi, Bapin Zaman
 Author URI: http://www.vistaarc.com, http://www.ebizzsol.com
 */
