@@ -3,7 +3,7 @@ Contributors: Rifat Nabi, Bapin Zaman
 Tags: photo, search, flickr
 Requires at least: 2.8
 Tested up to: 2.9.1
-Stable tag: 2.9.1
+Stable tag: 0.0.2
 
 Short Description Here...
 
