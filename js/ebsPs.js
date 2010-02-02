@@ -36,32 +36,35 @@ $j(function(){
             $j(this).siblings('.taghint').css('visibility', '');
     }).focus(function(){
         $j(this).siblings('.taghint').css('visibility', 'hidden');
-    }).keyup(function(e){
-        if ( 13 == e.which ) {
-            ebsPsJsSearch();
-            return false;
-        }
     }).keypress(function(e){
         if ( 13 == e.which ) {
-            ebsPsJsSearch();
+            ebsPsJsSearch(1);
             e.preventDefault();
             return false;
         }
     });
     
     $j('#ebsPsSearch').click(function(e){
-        ebsPsJsSearch();
+        ebsPsJsSearch(1);
         e.preventDefault();
         return false;
     });
     
 });
 
-function ebsPsJsSearch() {
+var ebsPsBusy = false;
+function ebsPsJsSearch(cur) {
+    
+    cur = parseInt(cur);
+    if(ebsPsBusy) return;
+    ebsPsBusy = true;
     $j('#ebsPsLoader').fadeIn();
-    $j.getJSON("http://api.flickr.com/services/rest/?api_key=1b21384bd8bc85c3b67e667e8a076e58&method=flickr.photos.search&per_page=30&sort=relevance&text="+escape($j('#ebsPsSearchTerm').val())+"&extras=owner_name&format=json&jsoncallback=?",
+    $j.getJSON("http://api.flickr.com/services/rest/?api_key=1b21384bd8bc85c3b67e667e8a076e58&method=flickr.photos.search&per_page=30&sort=relevance&text="+escape($j('#ebsPsSearchTerm').val())+"&page="+cur+"&extras=owner_name&format=json&jsoncallback=?",
     function(data){
-        //alert(data.photos.total);
+        
+        var total = data.photos.total;
+        var page = Math.ceil(total/30);
+        
         $j('#ebsPsLoader').fadeOut();
         $j('#ebsPsImages').empty();
         $j.each(data.photos.photo, function(i,item){
@@ -86,7 +89,49 @@ function ebsPsJsSearch() {
                 }
             }).appendTo("#ebsPsImages");
         });
-    });    
+        
+        if(page>1) {
+            var pagination = $j("<div>").addClass('ebsPsPagination');
+            
+            var i;
+            // Prev Button
+            i = cur-1;
+            if(i==0) {
+                pagination.append($j("<span>").html('&laquo;').addClass('this-page con'));
+                pagination.append($j("<span>").html('&#139;').addClass('this-page con'));
+            } else {
+                pagination.append($j("<a>").attr("href", 'javascript://').attr("onclick", 'ebsPsJsSearch(1)').html('&laquo;'));
+                pagination.append($j("<a>").attr("href", 'javascript://').attr("onclick", 'ebsPsJsSearch('+i+')').html('&#139;'));
+            }
+            
+            var c = 0;
+            var s = cur - 5;
+            if(s < 1) s = 1;
+            for(i = s; (i <= page) && (c < 11); ++i, c++) {
+                if(i==cur) {
+                    var tmp = $j("<span>").html(i).addClass('this-page');
+                } else {
+                    var tmp = $j("<a>").attr("href", 'javascript://').attr("onclick", 'ebsPsJsSearch('+i+')').html(i);
+                }
+                
+                pagination.append(tmp);
+            }
+            
+            // Next Button
+            i = cur+1;
+            if(cur==page) {
+                pagination.append($j("<span>").html('&raquo;').addClass('this-page con'));
+                pagination.append($j("<span>").html('&#155;').addClass('this-page con'));
+            } else {
+                pagination.append($j("<a>").attr("href", 'javascript://').attr("onclick", 'ebsPsJsSearch('+i+')').html('&#155;'));
+                pagination.append($j("<a>").attr("href", 'javascript://').attr("onclick", 'ebsPsJsSearch('+page+')').html('&raquo;'));
+            }
+            
+            pagination.appendTo("#ebsPsImages");
+        }
+        
+    });
+    ebsPsBusy = false;
     return false;
 }
 

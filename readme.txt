@@ -3,7 +3,7 @@ Contributors: Rifat Nabi, Bapin Zaman
 Tags: photo, search, flickr
 Requires at least: 2.8
 Tested up to: 2.9.1
-Stable tag: 0.0.3
+Stable tag: 0.0.4
 
 Short Description Here...
 
@@ -19,6 +19,9 @@ More changes coming soon. Please take a look at screen shots.
 2. Screenshot Admin Area
 
 == Change Log ==
+
+= 0.0.4 =
++ Pagination
 
 = 0.0.3 =
 + Image Size Option
